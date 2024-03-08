@@ -61,6 +61,38 @@ float4 shapeFragmentShader_grayscale(RasterizerData in [[stage_in]],
     return result;
   //  return float4(1.0,0.0, 0.0, 1.0);
 }
+float get_luma(float3 inColor){
+    float3 luma= {0.2126,0.7152,0.0722};
+    return dot(inColor,luma);
+}
+float4 border_detecter(RasterizerData in [[stage_in]],
+                                      texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]])
+  {
+      constexpr sampler textureSampler (mag_filter::linear,
+                                        min_filter::linear,
+                                        address::mirrored_repeat);
+      
+      // Sample the texture to obtain a color
+      const float4 sample  = inputFrame.sample(textureSampler, in.textureCoordinate);
+      float4
+      result  = float4(sample),
+      blurColor=float4(0.0);
+      
+      float blurCounter=0.0;
+      float steps=10.;
+      
+      for (float ix=0;ix<steps;ix++){
+          for (float iy=0;iy<steps;iy++){
+              blurColor+=inputFrame.sample(textureSampler,in.clipSpacePosition.xy+in.textureCoordinate.xy*float2(ix,iy));
+              blurCounter++;
+          }
+      }
+      blurColor/=blurCounter;
+      result.rgb= float3(2.0*abs(get_luma(blurColor.rgb)-get_luma(float3(sample))));
+
+      return result;
+    //  return float4(1.0,0.0, 0.0, 1.0);
+  }
 
 
 fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
@@ -74,16 +106,20 @@ fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
     const float4 sample  = inputFrame.sample(textureSampler, in.textureCoordinate);
     float4 result;
     result.a=1.0;
-    if(select_option==0){
-        result=sample;
+    switch(select_option){
+        case 1:
+            result=shapeFragmentShader_grayscale(in, inputFrame);
+            break;
+        case 2:
+            result=shapeFragmentShader_negitve(in, inputFrame);
+            break;
+        case 3:
+            result=border_detecter(in, inputFrame);
+            break;
+        default:
+            result=sample;
+            break;
     }
-    if(select_option==1.0){
-        result=shapeFragmentShader_grayscale(in, inputFrame);
-    }
-    if(select_option==2.0){
-        
-       result=shapeFragmentShader_negitve(in, inputFrame);
-           }  
     return result;
   //  return float4(1.0,0.0, 0.0, 1.0);
 }

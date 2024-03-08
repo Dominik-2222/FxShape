@@ -102,7 +102,7 @@ typedef struct Shapes {
                                defaultY:0.5
                          parameterFlags:kFxParameterFlag_DEFAULT];
     
-    NSArray *options = @[@"Orginal", @"grayscale", @"negative"];
+    NSArray *options = @[@"Orginal", @"grayscale", @"negative", @"border detecter"];
     [parmsApi addPopupMenuWithName:[bundle localizedStringForKey:@"postprocesing"
                                                            value:nil
                                                            table:nil]
