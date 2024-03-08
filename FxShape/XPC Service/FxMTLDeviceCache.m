@@ -68,6 +68,7 @@ static FxMTLDeviceCache*   gDeviceCache    = nil;
         
         id<MTLFunction> shapeVertexFunction = [[defaultLibrary newFunctionWithName:@"shapeVertexShader"] autorelease];
         id<MTLFunction> shapeFragmentFunction = [[defaultLibrary newFunctionWithName:@"shapeFragmentShader"] autorelease];
+    //  id<MTLFunction> shapeFragmentFunction = [[defaultLibrary newFunctionWithName:@"shapeFragmentShader_grayscale"] autorelease];
         
         id<MTLFunction> oscVertexFunction = [[defaultLibrary newFunctionWithName:@"OSCVertexShader"] autorelease];
         id<MTLFunction> oscFragmentFunction = [[defaultLibrary newFunctionWithName:@"OSCFragmentShader"] autorelease];

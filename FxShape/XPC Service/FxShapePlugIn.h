@@ -14,7 +14,8 @@ enum {
     kLowerLeftID    = 1,
     kUpperRightID   = 2,
     kCircleCenter   = 3,
-    kCircleRadius   = 4
+    kCircleRadius   = 4,
+    kprocessing=5
 };
 
 

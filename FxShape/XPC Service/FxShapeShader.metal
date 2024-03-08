@@ -35,7 +35,20 @@ vertex RasterizerData shapeVertexShader(uint vertexID [[vertex_id]],
 }
 
 // Fragment function
-fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
+float4 shapeFragmentShader_negitve(RasterizerData in [[stage_in]],
+                                   texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]])
+{
+    constexpr sampler textureSampler (mag_filter::linear,
+                                      min_filter::linear);
+    
+    // Sample the texture to obtain a color
+    const float4 sample  = inputFrame.sample(textureSampler, in.textureCoordinate);
+    float4      result  = float4(sample);
+        result.rgb=(1.0-result.rgb);
+    return result;
+  //  return float4(1.0,0.0, 0.0, 1.0);
+}
+float4 shapeFragmentShader_grayscale(RasterizerData in [[stage_in]],
                                     texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]])
 {
     constexpr sampler textureSampler (mag_filter::linear,
@@ -44,7 +57,33 @@ fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
     // Sample the texture to obtain a color
     const float4 sample  = inputFrame.sample(textureSampler, in.textureCoordinate);
     float4      result  = float4(sample);
-    	result.rgb=(1.0-result.rgb);
+    result.rgb=float3(result.r*0.3+result.g*0.59+result.a*0.11);
+    return result;
+  //  return float4(1.0,0.0, 0.0, 1.0);
+}
+
+
+fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
+                                    texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]],
+                                    constant int &select_option [[buffer(3)]] )
+{
+    constexpr sampler textureSampler (mag_filter::linear,
+                                      min_filter::linear);
+    
+    // Sample the texture to obtain a color
+    const float4 sample  = inputFrame.sample(textureSampler, in.textureCoordinate);
+    float4 result;
+    result.a=1.0;
+    if(select_option==0){
+        result=sample;
+    }
+    if(select_option==1.0){
+        result=shapeFragmentShader_grayscale(in, inputFrame);
+    }
+    if(select_option==2.0){
+        
+       result=shapeFragmentShader_negitve(in, inputFrame);
+           }  
     return result;
   //  return float4(1.0,0.0, 0.0, 1.0);
 }

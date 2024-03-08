@@ -22,7 +22,8 @@ typedef enum FxSampleImageVertexIndex {
 // Fragment shader uniforms
 typedef enum FxSampleTextureIndex {
     FSTI_InputImage = 0,
-    FSTI_InputImage2 = 1
+    FSTI_InputImage2 = 1,
+    select_opt=3
 } FxSampleTextureIndex;
 
 // Structures passed into the vertex shader. This is the memory
@@ -46,7 +47,8 @@ typedef enum FxShapeOSCBufferIndex {
 typedef enum FxShapeShaderVertex {
     FSSI_Vertices = 0,
     FSSI_ModelView = 1,
-    FSSI_Projection = 2
+    FSSI_Projection = 2,
+
 } FxShapeShaderVertex;
 
 // Vertices for just drawing the shapes to the output

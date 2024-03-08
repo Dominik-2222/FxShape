@@ -18,14 +18,14 @@ enum {
 typedef struct Shapes {
     FxPoint2D   lowerLeft;
     FxPoint2D   upperRight;
-    FxPoint2D   circleCenter;
-    double  circleRadius;
-} Shapes;
+    int option;
+} Params;
 
 @implementation FxShapePlugIn
 {
     id<MTLTexture>global_sourceTexture;
     long global_width;
+    int select_option;
     long global_height;
 }
 //---------------------------------------------------------
@@ -102,26 +102,14 @@ typedef struct Shapes {
                                defaultY:0.5
                          parameterFlags:kFxParameterFlag_DEFAULT];
     
-//    [parmsApi addPointParameterWithName:[bundle localizedStringForKey:@"FxShape::Circle Center"
-//                                                                value:nil
-//                                                                table:nil]
-//                            parameterID:kCircleCenter
-//                               defaultX:0.0
-//                               defaultY:0.0
-//                         parameterFlags:kFxParameterFlag_DEFAULT];
-    
-//    [parmsApi addFloatSliderWithName:[bundle localizedStringForKey:@"FxShape::Circle Radius"
-//                                                             value:nil
-//                                                             table:nil]
-//                         parameterID:kCircleRadius
-//                        defaultValue:0.0
-//                        parameterMin:0.0
-//                        parameterMax:4000.0
-//                           sliderMin:0.0
-//                           sliderMax:1000.0
-//                               delta:1.0
-//                      parameterFlags:kFxParameterFlag_DEFAULT];
-
+    NSArray *options = @[@"Orginal", @"grayscale", @"negative"];
+    [parmsApi addPopupMenuWithName:[bundle localizedStringForKey:@"postprocesing"
+                                                           value:nil
+                                                           table:nil]
+                       parameterID:kprocessing 
+                      defaultValue:1
+                       menuEntries:options
+                    parameterFlags:kFxParameterFlag_DEFAULT];
     return YES;
 }
 
@@ -156,8 +144,9 @@ typedef struct Shapes {
         }
         return NO;
     }
-    
-    Shapes  shapeState;
+    select_option=kprocessing;
+
+    Params shapeState;
     [pluginState getBytes:&shapeState
                    length:sizeof(shapeState)];
     
@@ -177,13 +166,8 @@ typedef struct Shapes {
                                      (shapeState.upperRight.x - shapeState.lowerLeft.x) * srcImageSize.width,
                                      (shapeState.upperRight.y - shapeState.lowerLeft.y) * srcImageSize.height);
     rectBounds = CGRectOffset(rectBounds, srcLowerLeft.x, srcLowerLeft.y);
-    CGRect  circleBounds    = CGRectMake((shapeState.circleCenter.x * srcImageSize.width - shapeState.circleRadius),
-                                         (shapeState.circleCenter.y * srcImageSize.height - shapeState.circleRadius),
-                                         shapeState.circleRadius * 2.0, shapeState.circleRadius * 2.0);
-    circleBounds = CGRectOffset(circleBounds, srcLowerLeft.x, srcLowerLeft.y);
     
     imageBounds = CGRectUnion(imageBounds, rectBounds);
-    imageBounds = CGRectUnion(imageBounds, circleBounds);
     
     // Convert back into pixel space
     FxPoint2D   dstLowerLeft    = imageBounds.origin;
@@ -246,12 +230,12 @@ typedef struct Shapes {
         return NO;
     }
     
-    Shapes  shapeState  = {
+    Params  shapeState  = {
         { 0.0, 0.0 },
-        { 1.0, 1.0 },
-        { 0.5, 0.5 },
-        500.0
+        { 1.0, 1.0 }
     };
+    
+    shapeState.option = 1;
     
     [paramAPI getXValue:&shapeState.lowerLeft.x
                  YValue:&shapeState.lowerLeft.y
@@ -263,13 +247,8 @@ typedef struct Shapes {
           fromParameter:kUpperRightID
                  atTime:renderTime];
     
-    [paramAPI getXValue:&shapeState.circleCenter.x
-                 YValue:&shapeState.circleCenter.y
-          fromParameter:kCircleCenter
-                 atTime:renderTime];
-    
-    [paramAPI getFloatValue:&shapeState.circleRadius
-              fromParameter:kCircleRadius
+    [paramAPI getIntValue:&shapeState.option
+              fromParameter:kprocessing
                      atTime:renderTime];
     
     *pluginState = [NSData dataWithBytes:&shapeState
@@ -314,7 +293,8 @@ typedef struct Shapes {
         
         return NO;
     }
-    
+    select_option=kprocessing;
+
     // Make a command buffer
     id<MTLCommandBuffer>    commandBuffer   = [commandQueue commandBuffer];
     commandBuffer.label = @"FxShape Command Buffer";
@@ -391,10 +371,10 @@ typedef struct Shapes {
                               sourceImage:(FxImageTile*)sourceImage
                               pluginState:(NSData*)pluginState
 {
-    Shapes  shapeState;
+    Params  shapeState;
     [pluginState getBytes:&shapeState
                    length:sizeof(shapeState)];
-    
+    select_option=kprocessing;
     float   outputWidth     = (float)(destinationImage.tilePixelBounds.right -
                                       destinationImage.tilePixelBounds.left);
     float   outputHeight    = (float)(destinationImage.tilePixelBounds.top -
@@ -534,65 +514,7 @@ typedef struct Shapes {
     return projection;
 }
 
-- (void)drawCircle:(Shapes)shapeState
-   withSourceImage:(FxImageTile*)sourceImage
-  destinationImage:(FxImageTile*)destinationImage
-         modelView:(matrix_float4x4)modelView
-        projection:(matrix_float4x4)projection
-    commandEncoder:(id<MTLRenderCommandEncoder>)commandEncoder;
-{
-    // Get the circle center in image space
-    float   inputImageWidth     = sourceImage.imagePixelBounds.right - sourceImage.imagePixelBounds.left;
-    float   inputImageHeight    = sourceImage.imagePixelBounds.top - sourceImage.imagePixelBounds.bottom;
-    FxPoint2D imageCircleCenter    = {
-        shapeState.circleCenter.x * inputImageWidth,
-        shapeState.circleCenter.y * inputImageHeight
-    };
-    imageCircleCenter = [sourceImage.inversePixelTransform transform2DPoint:imageCircleCenter];
-    
-    // Create the vertices of the circle
-    const size_t kNumCircleVertices = 24;
-    ShapeVertex circleVertices [ kNumCircleVertices * 3 ];  // Times 3 because we're drawing triangles
-    float circleRadius = shapeState.circleRadius;
-    float theta = 0.0;
-    float deltaTheta = M_PI * 2.0 / (float)kNumCircleVertices;
-    for (size_t nextVertexIndex = 0; nextVertexIndex < kNumCircleVertices; nextVertexIndex++)
-    {
-        // Circle center
-        circleVertices [ nextVertexIndex * 3 + 0 ].position.x = imageCircleCenter.x;
-        circleVertices [ nextVertexIndex * 3 + 0 ].position.y = imageCircleCenter.y;
-        
-        // Point on the circle
-        circleVertices [ nextVertexIndex * 3 + 1 ].position.x = circleRadius * cos(theta) + imageCircleCenter.x;
-        circleVertices [ nextVertexIndex * 3 + 1 ].position.y = circleRadius * sin(theta) + imageCircleCenter.y;
-        
-        // Advance the angle
-        theta += deltaTheta;
-        
-        // Next point on the circle
-        circleVertices [ nextVertexIndex * 3 + 2 ].position.x = circleRadius * cos(theta) + imageCircleCenter.x;
-        circleVertices [ nextVertexIndex * 3 + 2 ].position.y = circleRadius * sin(theta) + imageCircleCenter.y;
-    }
-    
-    // Send everything to the shaders for drawing
-    [commandEncoder setVertexBytes:&circleVertices[0]
-                            length:sizeof(circleVertices)
-                           atIndex:FSSI_Vertices];
-    
-    [commandEncoder setVertexBytes:&modelView
-                            length:sizeof(modelView)
-                           atIndex: FSSI_ModelView];
-    
-    [commandEncoder setVertexBytes:&projection
-                            length:sizeof(projection)
-                           atIndex:FSSI_Projection];
-    
-    [commandEncoder drawPrimitives:MTLPrimitiveTypeTriangle
-                       vertexStart:0
-                       vertexCount:kNumCircleVertices * 3];
-}
-
-- (void)drawRectangle:(Shapes)shapeState
+- (void)drawRectangle:(Params)shapeState
     withSourceImage:(FxImageTile*)sourceImage
    destinationImage:(FxImageTile*)destinationImage
         
@@ -673,8 +595,9 @@ typedef struct Shapes {
          { { rectLowerLeft.x, rectLowerLeft.y   },{ tex_c[2][0], tex_c[2][1]} }, // Dolny lewy róg
          { { rectLowerLeft.x, rectUpperRight.y },{ tex_c[3][0], tex_c[3][1]} }, // Górny prawy róg
          { { rectUpperRight.x, rectUpperRight.y },{ tex_c[1][0], tex_c[1][1]} } // Dolny prawy róg
-
     };
+    
+    
 NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectLowerLeft.y, tex_c[0][0], tex_c[0][1]); // Top-left
 NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1][0], tex_c[1][1]); // Bottom-right
 NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectLowerLeft.y, tex_c[2][0], tex_c[2][1]); // Bottom-left
@@ -683,7 +606,8 @@ NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectUpperRight.y, tex_c[3]
 NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1][0], tex_c[1][1]);// Bottom-right
 
     size_t numRectVertices = sizeof(rectVertices) / sizeof (rectVertices[0]);
-    
+    select_option=kprocessing;
+
     // Pass everything to the shaders for drawing
     [commandEncoder setVertexBytes:&rectVertices
                             length:numRectVertices * sizeof(rectVertices[0])
@@ -698,6 +622,11 @@ NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1
                            atIndex:FSSI_Projection];
     [commandEncoder setFragmentTexture:global_sourceTexture
                                atIndex:FSTI_InputImage2];
+    
+    [commandEncoder setFragmentBytes:&shapeState.option
+                              length:sizeof(shapeState)
+                             atIndex:3];
+    
     [commandEncoder drawPrimitives:MTLPrimitiveTypeTriangle
                        vertexStart:0
                        vertexCount:numRectVertices];
@@ -709,7 +638,7 @@ NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1
                                sourceImage:(FxImageTile*)sourceImage
                                pluginState:(NSData*)pluginState
 {
-    Shapes  shapeState;
+    Params  shapeState;
     [pluginState getBytes:&shapeState
                    length:sizeof(shapeState)];
 
@@ -722,13 +651,13 @@ NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1
                                                             destinationImage:destinationImage];
     
     // Draw the circle
-    [self drawCircle:shapeState
-     withSourceImage:sourceImage
-    destinationImage:destinationImage
-           modelView:modelView
-          projection:projection
-      commandEncoder:commandEncoder];
-    
+//    [self drawCircle:shapeState
+//     withSourceImage:sourceImage
+//    destinationImage:destinationImage
+//           modelView:modelView
+//          projection:projection
+//      commandEncoder:commandEncoder];
+//    
     // Draw the rectangle
     [self drawRectangle:shapeState
         withSourceImage:sourceImage
