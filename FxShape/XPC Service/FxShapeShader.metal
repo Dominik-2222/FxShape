@@ -35,7 +35,7 @@ vertex RasterizerData shapeVertexShader(uint vertexID [[vertex_id]],
 }
 
 // Fragment function
-float4 shapeFragmentShader_negitve(RasterizerData in [[stage_in]],
+float4 negitve(RasterizerData in [[stage_in]],
                                    texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]])
 {
     constexpr sampler textureSampler (mag_filter::linear,
@@ -48,7 +48,7 @@ float4 shapeFragmentShader_negitve(RasterizerData in [[stage_in]],
     return result;
   //  return float4(1.0,0.0, 0.0, 1.0);
 }
-float4 shapeFragmentShader_grayscale(RasterizerData in [[stage_in]],
+float4 grayscale(RasterizerData in [[stage_in]],
                                     texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]])
 {
     constexpr sampler textureSampler (mag_filter::linear,
@@ -108,10 +108,10 @@ fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
     result.a=1.0;
     switch(select_option){
         case 1:
-            result=shapeFragmentShader_grayscale(in, inputFrame);
+            result=grayscale(in, inputFrame);
             break;
         case 2:
-            result=shapeFragmentShader_negitve(in, inputFrame);
+            result=negitve(in, inputFrame);
             break;
         case 3:
             result=border_detecter(in, inputFrame);
