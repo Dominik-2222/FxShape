@@ -102,26 +102,26 @@ typedef struct Shapes {
                                defaultY:0.5
                          parameterFlags:kFxParameterFlag_DEFAULT];
     
-    [parmsApi addPointParameterWithName:[bundle localizedStringForKey:@"FxShape::Circle Center"
-                                                                value:nil
-                                                                table:nil]
-                            parameterID:kCircleCenter
-                               defaultX:0.0
-                               defaultY:0.0
-                         parameterFlags:kFxParameterFlag_DEFAULT];
+//    [parmsApi addPointParameterWithName:[bundle localizedStringForKey:@"FxShape::Circle Center"
+//                                                                value:nil
+//                                                                table:nil]
+//                            parameterID:kCircleCenter
+//                               defaultX:0.0
+//                               defaultY:0.0
+//                         parameterFlags:kFxParameterFlag_DEFAULT];
     
-    [parmsApi addFloatSliderWithName:[bundle localizedStringForKey:@"FxShape::Circle Radius"
-                                                             value:nil
-                                                             table:nil]
-                         parameterID:kCircleRadius
-                        defaultValue:0.0
-                        parameterMin:0.0
-                        parameterMax:4000.0
-                           sliderMin:0.0
-                           sliderMax:1000.0
-                               delta:1.0
-                      parameterFlags:kFxParameterFlag_DEFAULT];
-    
+//    [parmsApi addFloatSliderWithName:[bundle localizedStringForKey:@"FxShape::Circle Radius"
+//                                                             value:nil
+//                                                             table:nil]
+//                         parameterID:kCircleRadius
+//                        defaultValue:0.0
+//                        parameterMin:0.0
+//                        parameterMax:4000.0
+//                           sliderMin:0.0
+//                           sliderMax:1000.0
+//                               delta:1.0
+//                      parameterFlags:kFxParameterFlag_DEFAULT];
+
     return YES;
 }
 
@@ -652,52 +652,36 @@ typedef struct Shapes {
     float tex_c[4][2];
     
     tex_c[0][0]=0.0; tex_c[0][1]=0.0;
-    tex_c[1][0]=1.0; tex_c[1][1]=1.0;
+    tex_c[1][0]=0.0; tex_c[1][1]=1.0;
     tex_c[2][0]=1.0; tex_c[2][1]=0.0;
-    tex_c[3][0]=0.0; tex_c[3][1]=1.0;
+    tex_c[3][0]=1.0; tex_c[3][1]=1.0;
     
-  //  tex_c[3][0]=1.0; tex_c[3][1]=0.0;
-   // tex_c[4][0]=1.0; tex_c[4][1]=1.0;
-    tex_c[0][0]=shapeState.lowerLeft.x; tex_c[0][1]=shapeState.lowerLeft.y;
+    tex_c[0][0]=shapeState.upperRight.x; tex_c[0][1]=shapeState.lowerLeft.y;
     tex_c[1][0]=shapeState.upperRight.x; tex_c[1][1]=shapeState.upperRight.y;
-    tex_c[2][0]=shapeState.upperRight.x; tex_c[2][1]=shapeState.lowerLeft.y;
+    tex_c[2][0]=shapeState.lowerLeft.x; tex_c[2][1]=shapeState.lowerLeft.y;
     tex_c[3][0]=shapeState.lowerLeft.x; tex_c[3][1]=shapeState.upperRight.y;
 
-//    NSLog(@"g%d,%d",global_width,global_height);
+
   
-    NSLog(@"%f,%f",shapeState.lowerLeft.x, shapeState.lowerLeft.y );
-    NSLog(@"%f,%f",shapeState.upperRight.x, shapeState.upperRight.y);
-    
-    
-    
-    //NSLog(@"%f,%f",rectLowerLeft.x, rectLowerLeft.y  );
-   // NSLog(@"%f,%f",rectLowerLeft.x, rectLowerLeft.y  );
-//    NSLog(@"%f,%f",rectUpperRight.x, rectUpperRight.y);
-//    NSLog(@"%f,%f",rectLowerLeft.x, rectUpperRight.y );
-//    tex_c[0][0]=; tex_c[0][1]=;
-//    tex_c[1][0]=; tex_c[1][1]=;
-//    tex_c[2][0]=; tex_c[2][1]=;
-//    tex_c[3][0]=; tex_c[3][1]=;
-//    tex_c[4][0]=; tex_c[4][1]=;
-//    tex_c[5][0]=; tex_c[5][1]=;
-    
-    
-    
-//    tex_c[0][0]=0.0; tex_c[0][1]=0.0;
-//    tex_c[1][0]=1.0; tex_c[1][1]=1.0;
-//    tex_c[2][0]=1.0; tex_c[2][1]=0.0;
-//    tex_c[3][0]=0.0; tex_c[3][1]=1.0;
-//    
     ShapeVertex rectVertices[] = {
         // First triangle
-        { { rectUpperRight.x, rectLowerLeft.y },{ tex_c[0][0], tex_c[0][1]} }, // Top-left corner
-        { { rectUpperRight.x, rectUpperRight.y },{ tex_c[1][0], tex_c[1][1]} }, // Bottom-right corner
-        { { rectLowerLeft.x, rectLowerLeft.y   },{ tex_c[2][0], tex_c[2][1]} }, // Bottom-left corner
-        // Second triangle
-        { { rectLowerLeft.x, rectLowerLeft.y   },{ tex_c[2][0], tex_c[2][1]} }, // Bottom-left corner
-        { { rectLowerLeft.x, rectUpperRight.y },{ tex_c[3][0], tex_c[3][1]} }, // Top-right corner
-        { { rectUpperRight.x, rectUpperRight.y },{ tex_c[1][0], tex_c[1][1]} } // Bottom-right corner
+   
+        { { rectUpperRight.x, rectLowerLeft.y },{ tex_c[0][0], tex_c[0][1]} }, // Górny lewy róg
+         { { rectUpperRight.x, rectUpperRight.y },{ tex_c[1][0], tex_c[1][1]} }, // Dolny prawy róg
+         { { rectLowerLeft.x, rectLowerLeft.y   },{ tex_c[2][0], tex_c[2][1]} }, // Dolny lewy róg
+         // Drugi trójkąt
+         { { rectLowerLeft.x, rectLowerLeft.y   },{ tex_c[2][0], tex_c[2][1]} }, // Dolny lewy róg
+         { { rectLowerLeft.x, rectUpperRight.y },{ tex_c[3][0], tex_c[3][1]} }, // Górny prawy róg
+         { { rectUpperRight.x, rectUpperRight.y },{ tex_c[1][0], tex_c[1][1]} } // Dolny prawy róg
+
     };
+NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectLowerLeft.y, tex_c[0][0], tex_c[0][1]); // Top-left
+NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1][0], tex_c[1][1]); // Bottom-right
+NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectLowerLeft.y, tex_c[2][0], tex_c[2][1]); // Bottom-left
+NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectLowerLeft.y, tex_c[2][0], tex_c[2][1]); // Bottom-left
+NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectUpperRight.y, tex_c[3][0], tex_c[3][1]); // Top-right
+NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1][0], tex_c[1][1]);// Bottom-right
+
     size_t numRectVertices = sizeof(rectVertices) / sizeof (rectVertices[0]);
     
     // Pass everything to the shaders for drawing

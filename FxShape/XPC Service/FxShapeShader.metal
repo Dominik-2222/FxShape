@@ -44,7 +44,7 @@ fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
     // Sample the texture to obtain a color
     const float4 sample  = inputFrame.sample(textureSampler, in.textureCoordinate);
     float4      result  = float4(sample);
-    result.rgb=(1.0-result.rgb);
+    	result.rgb=(1.0-result.rgb);
     return result;
   //  return float4(1.0,0.0, 0.0, 1.0);
 }
