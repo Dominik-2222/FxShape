@@ -79,7 +79,7 @@ float4 border_detecter(RasterizerData in [[stage_in]],
       blurColor=float4(0.0);
       
       float blurCounter=0.0;
-      float steps=10.;
+      float steps=20.;
       
       for (float ix=0;ix<steps;ix++){
           for (float iy=0;iy<steps;iy++){
