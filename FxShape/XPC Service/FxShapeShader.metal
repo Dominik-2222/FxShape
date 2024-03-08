@@ -128,10 +128,10 @@ fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
 {
     constexpr sampler textureSampler (mag_filter::linear,
                                       min_filter::linear);
-    
     const float4 sample  = inputFrame.sample(textureSampler, in.textureCoordinate);
     float4 result;
     result.a=1.0;
+    //menu for shader
     switch(select_option){
         case 1:
             result=grayscale(in, inputFrame);
@@ -153,11 +153,7 @@ fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
             break;
     }
     return result;
-
 }
-
-
-
 vertex RasterizerData
 vertexShader(uint vertexID [[vertex_id]],
              constant Vertex2D *vertexArray [[buffer(FSVI_Vertices)]],

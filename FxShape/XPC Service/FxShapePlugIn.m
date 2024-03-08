@@ -451,6 +451,7 @@ typedef struct Shapes {
         (left + right) / 2.0,
         (bottom + top) / 2.0
     };
+ 
     float   imageLeft   = destinationImage.imagePixelBounds.left;
     float   imageRight  = destinationImage.imagePixelBounds.right;
     float   imageBottom = destinationImage.imagePixelBounds.bottom;
@@ -463,7 +464,7 @@ typedef struct Shapes {
     // Put in the scale and translate from the pixel transform into the model matrix
     matrix_float4x4 pt;
     [self fxMatrix:sourceImage.pixelTransform
-   toMatrixFloat44:&pt];
+    toMatrixFloat44:&pt];
     pt.columns[0][3] += sourceImage.imagePixelBounds.left;
     pt.columns[1][3] -= sourceImage.imagePixelBounds.bottom;
     
@@ -480,10 +481,10 @@ typedef struct Shapes {
     // Metal is Y-down by default, but all of the host app's coords are Y-up
     matrix_float4x4 yUp = {
         {
-            { 1.0, 0.0, 0.0, 0.0 },
+            { 1.0,  0.0, 0.0, 0.0 },
             { 0.0, -1.0, 0.0, 0.0 },
-            { 0.0, 0.0, 1.0, 0.0 },
-            { 0.0, 0.0, 0.0, 1.0 }
+            { 0.0,  0.0, 1.0, 0.0 },
+            { 0.0,  0.0, 0.0, 1.0 }
         }
     };
     modelView = matrix_multiply(modelView, yUp);
@@ -517,7 +518,6 @@ typedef struct Shapes {
 - (void)drawRectangle:(Params)shapeState
     withSourceImage:(FxImageTile*)sourceImage
    destinationImage:(FxImageTile*)destinationImage
-        
           modelView:(matrix_float4x4)modelView
          projection:(matrix_float4x4)projection
      commandEncoder:(id<MTLRenderCommandEncoder>)commandEncoder;
@@ -527,77 +527,45 @@ typedef struct Shapes {
     float   inputImageHeight    = sourceImage.imagePixelBounds.top - sourceImage.imagePixelBounds.bottom;
     if(global_width<inputImageWidth){
         global_width=inputImageWidth;
-        
     }
+    
     if(global_height<inputImageWidth){
         global_height=inputImageWidth;
-        
     }
     
     FxPoint2D   rectLowerLeft = {
         shapeState.lowerLeft.x * inputImageWidth,
         shapeState.lowerLeft.y * inputImageHeight
     };
+    
     FxPoint2D   rectUpperRight  = {
         shapeState.upperRight.x * inputImageWidth,
         shapeState.upperRight.y * inputImageHeight
     };
+    
     rectLowerLeft = [sourceImage.inversePixelTransform transform2DPoint:rectLowerLeft];
     rectUpperRight = [sourceImage.inversePixelTransform transform2DPoint:rectUpperRight];
     
     // Create the vertices out of them
-//    ShapeVertex vertices[4];
-//    // Lower Right
-//    vertices [ 0 ].position.x = outputWidth / 2.0;
-//    vertices [ 0 ].position.y = outputHeight / -2.0;
-//    vertices [ 0 ].textureCoordinate.x = 1.0;
-//    vertices [ 0 ].textureCoordinate.y = 1.0;
-//    
-//    // Lower Left
-//    vertices [ 1 ].position.x = outputWidth / -2.0;
-//    vertices [ 1 ].position.y = outputHeight / -2.0;
-//    vertices [ 1 ].textureCoordinate.x = 0.0;
-//    vertices [ 1 ].textureCoordinate.y = 1.0;
-//
-//    // Upper Right
-//    vertices [ 2 ].position.x = outputWidth / 2.0;
-//    vertices [ 2 ].position.y = outputHeight / 2.0;
-//    vertices [ 2 ].textureCoordinate.x = 1.0;
-//    vertices [ 2 ].textureCoordinate.y = 0.0;
-//
-//    // Upper Left
-//    vertices [ 3 ].position.x = outputWidth / -2.0;
-//    vertices [ 3 ].position.y = outputHeight / 2.0;
-//    vertices [ 3 ].textureCoordinate.x = 0.0;
-//    vertices [ 3 ].textureCoordinate.y = 0.0;
-
-    float tex_c[4][2];
     
-    tex_c[0][0]=0.0; tex_c[0][1]=0.0;
-    tex_c[1][0]=0.0; tex_c[1][1]=1.0;
-    tex_c[2][0]=1.0; tex_c[2][1]=0.0;
-    tex_c[3][0]=1.0; tex_c[3][1]=1.0;
-    
-    tex_c[0][0]=shapeState.upperRight.x; tex_c[0][1]=shapeState.lowerLeft.y;
-    tex_c[1][0]=shapeState.upperRight.x; tex_c[1][1]=shapeState.upperRight.y;
-    tex_c[2][0]=shapeState.lowerLeft.x; tex_c[2][1]=shapeState.lowerLeft.y;
-    tex_c[3][0]=shapeState.lowerLeft.x; tex_c[3][1]=shapeState.upperRight.y;
-
-
-  
-    ShapeVertex rectVertices[] = {
-        // First triangle
-   
-        { { rectUpperRight.x, rectLowerLeft.y },{ tex_c[0][0], tex_c[0][1]} }, // Górny lewy róg
-         { { rectUpperRight.x, rectUpperRight.y },{ tex_c[1][0], tex_c[1][1]} }, // Dolny prawy róg
-         { { rectLowerLeft.x, rectLowerLeft.y   },{ tex_c[2][0], tex_c[2][1]} }, // Dolny lewy róg
-         // Drugi trójkąt
-         { { rectLowerLeft.x, rectLowerLeft.y   },{ tex_c[2][0], tex_c[2][1]} }, // Dolny lewy róg
-         { { rectLowerLeft.x, rectUpperRight.y },{ tex_c[3][0], tex_c[3][1]} }, // Górny prawy róg
-         { { rectUpperRight.x, rectUpperRight.y },{ tex_c[1][0], tex_c[1][1]} } // Dolny prawy róg
-    };
+        float tex_c[4][2];
+        tex_c[0][0]=shapeState.upperRight.x; tex_c[0][1]=shapeState.lowerLeft.y;
+        tex_c[1][0]=shapeState.upperRight.x; tex_c[1][1]=shapeState.upperRight.y;
+        tex_c[2][0]=shapeState.lowerLeft.x; tex_c[2][1]=shapeState.lowerLeft.y;
+        tex_c[3][0]=shapeState.lowerLeft.x; tex_c[3][1]=shapeState.upperRight.y;
+        ShapeVertex rectVertices[] = {
+            // First triangle
+            { { rectUpperRight.x, rectLowerLeft.y  },{ tex_c[0][0], tex_c[0][1]} }, // Górny lewy róg
+            { { rectUpperRight.x, rectUpperRight.y },{ tex_c[1][0], tex_c[1][1]} }, // Dolny prawy róg
+            { { rectLowerLeft.x,  rectLowerLeft.y  },{ tex_c[2][0], tex_c[2][1]} }, // Dolny lewy róg
+            // Second triangle
+            { { rectLowerLeft.x,  rectLowerLeft.y  },{ tex_c[2][0], tex_c[2][1]} }, // Dolny lewy róg
+            { { rectLowerLeft.x,  rectUpperRight.y },{ tex_c[3][0], tex_c[3][1]} }, // Górny prawy róg
+            { { rectUpperRight.x, rectUpperRight.y },{ tex_c[1][0], tex_c[1][1]} } // Dolny prawy róg
+        };
     
     
+    //debuging texturecord
 //NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectLowerLeft.y, tex_c[0][0], tex_c[0][1]); // Top-left
 //NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1][0], tex_c[1][1]); // Bottom-right
 //NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectLowerLeft.y, tex_c[2][0], tex_c[2][1]); // Bottom-left
@@ -650,14 +618,6 @@ typedef struct Shapes {
     matrix_float4x4 projection = [self createProjectionMatrixWithSourceImage:sourceImage
                                                             destinationImage:destinationImage];
     
-    // Draw the circle
-//    [self drawCircle:shapeState
-//     withSourceImage:sourceImage
-//    destinationImage:destinationImage
-//           modelView:modelView
-//          projection:projection
-//      commandEncoder:commandEncoder];
-//    
     // Draw the rectangle
     [self drawRectangle:shapeState
         withSourceImage:sourceImage
