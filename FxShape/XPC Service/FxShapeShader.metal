@@ -17,7 +17,7 @@ typedef struct
     float4 clipSpacePosition [[position]];
     float2 textureCoordinate;
 } RasterizerData;
-
+//Shape vertex sheder to shape
 vertex RasterizerData shapeVertexShader(uint vertexID [[vertex_id]],
                                         constant Vertex2D *vertexArray [[buffer(FSSI_Vertices)]],
                                         constant matrix_float4x4 *modelViewMatrix [[ buffer(FSSI_ModelView) ]],
@@ -33,8 +33,7 @@ vertex RasterizerData shapeVertexShader(uint vertexID [[vertex_id]],
     out.textureCoordinate = vertexArray[vertexID].textureCoordinate;
     return out;
 }
-
-// Fragment function
+//Negative mode
 float4 negitve(RasterizerData in [[stage_in]],
                                    texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]])
 {
@@ -46,8 +45,8 @@ float4 negitve(RasterizerData in [[stage_in]],
     float4      result  = float4(sample);
         result.rgb=(1.0-result.rgb);
     return result;
-  //  return float4(1.0,0.0, 0.0, 1.0);
 }
+//grayscale mode
 float4 grayscale(RasterizerData in [[stage_in]],
                                     texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]])
 {
@@ -59,12 +58,14 @@ float4 grayscale(RasterizerData in [[stage_in]],
     float4      result  = float4(sample);
     result.rgb=float3(result.r*0.3+result.g*0.59+result.a*0.11);
     return result;
-  //  return float4(1.0,0.0, 0.0, 1.0);
+ 
 }
+//calculate luma
 float get_luma(float3 inColor){
     float3 luma= {0.2126,0.7152,0.0722};
     return dot(inColor,luma);
 }
+//border detector
 float4 border_detecter(RasterizerData in [[stage_in]],
                                       texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]])
   {
@@ -91,10 +92,36 @@ float4 border_detecter(RasterizerData in [[stage_in]],
       result.rgb= float3(2.0*abs(get_luma(blurColor.rgb)-get_luma(float3(sample))));
 
       return result;
-    //  return float4(1.0,0.0, 0.0, 1.0);
+  }
+//add to pictures tanges function
+float4 tanges(RasterizerData in [[stage_in]],
+                                      texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]])
+  {
+      constexpr sampler textureSampler (mag_filter::linear,
+                                        min_filter::linear,
+                                        address::mirrored_repeat);
+      const float4 sample  = inputFrame.sample(textureSampler, in.textureCoordinate);
+      float4
+      result  = float4(sample);
+      result= tan(sample);
+          return result;
+  }
+//add for picture cosinus function
+float4 cosinus(RasterizerData in [[stage_in]],
+                                      texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]])
+  {
+      constexpr sampler textureSampler (mag_filter::linear,
+                                        min_filter::linear,
+                                        address::mirrored_repeat);
+      const float4 sample  = inputFrame.sample(textureSampler, in.textureCoordinate);
+      float4
+      result  = float4(sample);
+      result= cos(sample);
+          return result;
   }
 
 
+//fragment shape sheder menu
 fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
                                     texture2d<float> inputFrame [[ texture(FSTI_InputImage) ]],
                                     constant int &select_option [[buffer(3)]] )
@@ -102,7 +129,6 @@ fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
     constexpr sampler textureSampler (mag_filter::linear,
                                       min_filter::linear);
     
-    // Sample the texture to obtain a color
     const float4 sample  = inputFrame.sample(textureSampler, in.textureCoordinate);
     float4 result;
     result.a=1.0;
@@ -116,12 +142,18 @@ fragment float4 shapeFragmentShader(RasterizerData in [[stage_in]],
         case 3:
             result=border_detecter(in, inputFrame);
             break;
+        case 4:
+            result=tanges(in, inputFrame);
+            break;
+        case 5:
+            result=cosinus(in, inputFrame);
+            break;
         default:
             result=sample;
             break;
     }
     return result;
-  //  return float4(1.0,0.0, 0.0, 1.0);
+
 }
 
 
@@ -174,11 +206,8 @@ fragment float4 fragmentShader(RasterizerData in [[stage_in]],
     constexpr sampler textureSampler (mag_filter::linear,
                                       min_filter::linear);
     
-    // Sample the texture to obtain a color
     const float4 sample  = inputFrame.sample(textureSampler, in.textureCoordinate);
     float4      result  = float4(sample);
-    //return float4(in.textureCoordinate.x,in.textureCoordinate.y,0.0,1.0);
-    // We return the color of the texture
  
     return result;
 }

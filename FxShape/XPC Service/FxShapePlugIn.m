@@ -87,8 +87,8 @@ typedef struct Shapes {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     
     [parmsApi addPointParameterWithName:[bundle localizedStringForKey:@"FxShape::Lower Left"
-                                                                value:nil
-                                                                table:nil]
+                                                            value:nil
+                                                            table:nil]
                             parameterID:kLowerLeftID
                                defaultX:0.25
                                defaultY:0.25
@@ -102,7 +102,7 @@ typedef struct Shapes {
                                defaultY:0.5
                          parameterFlags:kFxParameterFlag_DEFAULT];
     
-    NSArray *options = @[@"Orginal", @"grayscale", @"negative", @"border detecter"];
+    NSArray *options = @[@"Orginal", @"grayscale", @"negative", @"border detecter",@"tanges",@"cosinus"];
     [parmsApi addPopupMenuWithName:[bundle localizedStringForKey:@"postprocesing"
                                                            value:nil
                                                            table:nil]
@@ -598,12 +598,12 @@ typedef struct Shapes {
     };
     
     
-NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectLowerLeft.y, tex_c[0][0], tex_c[0][1]); // Top-left
-NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1][0], tex_c[1][1]); // Bottom-right
-NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectLowerLeft.y, tex_c[2][0], tex_c[2][1]); // Bottom-left
-NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectLowerLeft.y, tex_c[2][0], tex_c[2][1]); // Bottom-left
-NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectUpperRight.y, tex_c[3][0], tex_c[3][1]); // Top-right
-NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1][0], tex_c[1][1]);// Bottom-right
+//NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectLowerLeft.y, tex_c[0][0], tex_c[0][1]); // Top-left
+//NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1][0], tex_c[1][1]); // Bottom-right
+//NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectLowerLeft.y, tex_c[2][0], tex_c[2][1]); // Bottom-left
+//NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectLowerLeft.y, tex_c[2][0], tex_c[2][1]); // Bottom-left
+//NSLog(@"x: %g, y: %g, x: %g, y: %g", rectLowerLeft.x, rectUpperRight.y, tex_c[3][0], tex_c[3][1]); // Top-right
+//NSLog(@"x: %g, y: %g, x: %g, y: %g", rectUpperRight.x, rectUpperRight.y, tex_c[1][0], tex_c[1][1]);// Bottom-right
 
     size_t numRectVertices = sizeof(rectVertices) / sizeof (rectVertices[0]);
     select_option=kprocessing;
