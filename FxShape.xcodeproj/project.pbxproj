@@ -1,0 +1,627 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A23187412166724F00917D7B /* FxMTLDeviceCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A23187402166724F00917D7B /* FxMTLDeviceCache.m */; };
+		A231874421667D7A00917D7B /* FxSampleImage.metal in Sources */ = {isa = PBXBuildFile; fileRef = A231874321667D7A00917D7B /* FxSampleImage.metal */; };
+		A23187482166AD5200917D7B /* FxShapeOSC.metal in Sources */ = {isa = PBXBuildFile; fileRef = A23187472166AD5200917D7B /* FxShapeOSC.metal */; };
+		A28AB5CB239F0FE30091EE84 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A28AB5C9239F0FE30091EE84 /* InfoPlist.strings */; };
+		A28AB5CE239F0FF00091EE84 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A28AB5CC239F0FEF0091EE84 /* Credits.rtf */; };
+		A2BD227421655F9900A33A79 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BD227321655F9900A33A79 /* Cocoa.framework */; };
+		A2BD227B21655F9900A33A79 /* FxShape.pluginkit in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = A2BD227A21655F9900A33A79 /* FxShape.pluginkit */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A2BD227F21655F9900A33A79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BD227E21655F9900A33A79 /* Foundation.framework */; };
+		A2BD228121655F9900A33A79 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BD228021655F9900A33A79 /* AppKit.framework */; };
+		A2BD228321655F9900A33A79 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BD228221655F9900A33A79 /* Accelerate.framework */; };
+		A2BD228721655F9900A33A79 /* FxPlug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BD228621655F9900A33A79 /* FxPlug.framework */; };
+		A2BD229C21655F9900A33A79 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BD229B21655F9900A33A79 /* AppDelegate.m */; };
+		A2BD229E21655F9900A33A79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BD229D21655F9900A33A79 /* main.m */; };
+		A2BD22A521655F9900A33A79 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2BD22A321655F9900A33A79 /* MainMenu.xib */; };
+		A2BD22B121655F9900A33A79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BD22B021655F9900A33A79 /* main.m */; };
+		A2BD22B521655F9900A33A79 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A2BD22B321655F9900A33A79 /* InfoPlist.strings */; };
+		A2BD22D321655FFB00A33A79 /* FxShapePlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BD22D121655FFB00A33A79 /* FxShapePlugIn.m */; };
+		A2BD22D6216563B900A33A79 /* FxShapeOSC.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BD22D5216563B900A33A79 /* FxShapeOSC.m */; };
+		A2BD22D821657BBE00A33A79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A2BD22D721657BBE00A33A79 /* Localizable.strings */; };
+		A2DB4F8A21E56DBD0045307E /* FxShapeShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = A2DB4F8821E562BD0045307E /* FxShapeShader.metal */; };
+		D6C8249624632E5E00D9C626 /* FxPlug.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = A2BD228621655F9900A33A79 /* FxPlug.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A2BD227C21655F9900A33A79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2BD226821655F9900A33A79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A2BD227921655F9900A33A79;
+			remoteInfo = "XPC Service";
+		};
+		A2BD229321655F9900A33A79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2BD226821655F9900A33A79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A2BD227921655F9900A33A79;
+			remoteInfo = "XPC Service";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A2BD22C921655F9900A33A79 /* Embed PlugIns */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed PlugIns";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2BD22CD21655F9900A33A79 /* Embed PlugIns */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A2BD227B21655F9900A33A79 /* FxShape.pluginkit in Embed PlugIns */,
+			);
+			name = "Embed PlugIns";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6C8249524632E5500D9C626 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D6C8249624632E5E00D9C626 /* FxPlug.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A231873F2166724F00917D7B /* FxMTLDeviceCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FxMTLDeviceCache.h; path = "XPC Service/FxMTLDeviceCache.h"; sourceTree = "<group>"; };
+		A23187402166724F00917D7B /* FxMTLDeviceCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FxMTLDeviceCache.m; path = "XPC Service/FxMTLDeviceCache.m"; sourceTree = "<group>"; };
+		A23187422166727F00917D7B /* FxShapeShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FxShapeShaderTypes.h; path = "XPC Service/FxShapeShaderTypes.h"; sourceTree = "<group>"; };
+		A231874321667D7A00917D7B /* FxSampleImage.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = FxSampleImage.metal; path = "XPC Service/FxSampleImage.metal"; sourceTree = "<group>"; };
+		A23187472166AD5200917D7B /* FxShapeOSC.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = FxShapeOSC.metal; path = "XPC Service/FxShapeOSC.metal"; sourceTree = "<group>"; };
+		A28AB5C8239F0F130091EE84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Wrapper Application/Base.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		A28AB5CA239F0FE30091EE84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Wrapper Application/Base.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		A28AB5CD239F0FEF0091EE84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = "Wrapper Application/Base.lproj/Credits.rtf"; sourceTree = "<group>"; };
+		A2BD227021655F9900A33A79 /* FxShape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FxShape.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2BD227321655F9900A33A79 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		A2BD227A21655F9900A33A79 /* FxShape.pluginkit */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FxShape.pluginkit; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2BD227E21655F9900A33A79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A2BD228021655F9900A33A79 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A2BD228221655F9900A33A79 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		A2BD228421655F9900A33A79 /* PluginManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PluginManager.framework; path = /Library/Developer/Frameworks/PluginManager.framework; sourceTree = "<absolute>"; };
+		A2BD228621655F9900A33A79 /* FxPlug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FxPlug.framework; path = /Library/Developer/Frameworks/FxPlug.framework; sourceTree = "<absolute>"; };
+		A2BD229921655F9900A33A79 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = "Wrapper Application/Prefix.pch"; sourceTree = "<group>"; };
+		A2BD229A21655F9900A33A79 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "Wrapper Application/AppDelegate.h"; sourceTree = "<group>"; };
+		A2BD229B21655F9900A33A79 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "Wrapper Application/AppDelegate.m"; sourceTree = "<group>"; };
+		A2BD229D21655F9900A33A79 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Wrapper Application/main.m"; sourceTree = "<group>"; };
+		A2BD229F21655F9900A33A79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Wrapper Application/Info.plist"; sourceTree = "<group>"; };
+		A2BD22A921655F9900A33A79 /* SandboxEntitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SandboxEntitlements.entitlements; path = "Wrapper Application/SandboxEntitlements.entitlements"; sourceTree = "<group>"; };
+		A2BD22AC21655F9900A33A79 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = "XPC Service/Prefix.pch"; sourceTree = "<group>"; };
+		A2BD22B021655F9900A33A79 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "XPC Service/main.m"; sourceTree = "<group>"; };
+		A2BD22B221655F9900A33A79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "XPC Service/Info.plist"; sourceTree = "<group>"; };
+		A2BD22B421655F9900A33A79 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "XPC Service/en.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		A2BD22D121655FFB00A33A79 /* FxShapePlugIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FxShapePlugIn.m; path = "XPC Service/FxShapePlugIn.m"; sourceTree = "<group>"; };
+		A2BD22D221655FFB00A33A79 /* FxShapePlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FxShapePlugIn.h; path = "XPC Service/FxShapePlugIn.h"; sourceTree = "<group>"; };
+		A2BD22D4216563B900A33A79 /* FxShapeOSC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FxShapeOSC.h; path = "XPC Service/FxShapeOSC.h"; sourceTree = "<group>"; };
+		A2BD22D5216563B900A33A79 /* FxShapeOSC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FxShapeOSC.m; path = "XPC Service/FxShapeOSC.m"; sourceTree = "<group>"; };
+		A2BD22D721657BBE00A33A79 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = "XPC Service/Localizable.strings"; sourceTree = "<group>"; };
+		A2DB4F8821E562BD0045307E /* FxShapeShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = FxShapeShader.metal; path = "XPC Service/FxShapeShader.metal"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A2BD226D21655F9900A33A79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2BD227421655F9900A33A79 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2BD227621655F9900A33A79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2BD228321655F9900A33A79 /* Accelerate.framework in Frameworks */,
+				A2BD227F21655F9900A33A79 /* Foundation.framework in Frameworks */,
+				A2BD228121655F9900A33A79 /* AppKit.framework in Frameworks */,
+				A2BD228721655F9900A33A79 /* FxPlug.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A2BD226721655F9900A33A79 = {
+			isa = PBXGroup;
+			children = (
+				A2BD229721655F9900A33A79 /* FxShape */,
+				A2BD227221655F9900A33A79 /* Frameworks */,
+				A2BD227121655F9900A33A79 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A2BD227121655F9900A33A79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A2BD227021655F9900A33A79 /* FxShape.app */,
+				A2BD227A21655F9900A33A79 /* FxShape.pluginkit */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A2BD227221655F9900A33A79 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A2BD227321655F9900A33A79 /* Cocoa.framework */,
+				A2BD227E21655F9900A33A79 /* Foundation.framework */,
+				A2BD228021655F9900A33A79 /* AppKit.framework */,
+				A2BD228221655F9900A33A79 /* Accelerate.framework */,
+				A2BD228421655F9900A33A79 /* PluginManager.framework */,
+				A2BD228621655F9900A33A79 /* FxPlug.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A2BD229721655F9900A33A79 /* FxShape */ = {
+			isa = PBXGroup;
+			children = (
+				A2BD229821655F9900A33A79 /* Wrapper Application */,
+				A2BD22AB21655F9900A33A79 /* PlugIn */,
+			);
+			path = FxShape;
+			sourceTree = "<group>";
+		};
+		A2BD229821655F9900A33A79 /* Wrapper Application */ = {
+			isa = PBXGroup;
+			children = (
+				A2BD229921655F9900A33A79 /* Prefix.pch */,
+				A2BD229A21655F9900A33A79 /* AppDelegate.h */,
+				A2BD229B21655F9900A33A79 /* AppDelegate.m */,
+				A2BD229D21655F9900A33A79 /* main.m */,
+				A2BD229F21655F9900A33A79 /* Info.plist */,
+				A28AB5C9239F0FE30091EE84 /* InfoPlist.strings */,
+				A2BD22A321655F9900A33A79 /* MainMenu.xib */,
+				A28AB5CC239F0FEF0091EE84 /* Credits.rtf */,
+				A2BD22A921655F9900A33A79 /* SandboxEntitlements.entitlements */,
+			);
+			name = "Wrapper Application";
+			sourceTree = "<group>";
+		};
+		A2BD22AB21655F9900A33A79 /* PlugIn */ = {
+			isa = PBXGroup;
+			children = (
+				A2BD22AC21655F9900A33A79 /* Prefix.pch */,
+				A2BD22D221655FFB00A33A79 /* FxShapePlugIn.h */,
+				A2BD22D121655FFB00A33A79 /* FxShapePlugIn.m */,
+				A2BD22D4216563B900A33A79 /* FxShapeOSC.h */,
+				A2BD22D5216563B900A33A79 /* FxShapeOSC.m */,
+				A231873F2166724F00917D7B /* FxMTLDeviceCache.h */,
+				A23187402166724F00917D7B /* FxMTLDeviceCache.m */,
+				A231874321667D7A00917D7B /* FxSampleImage.metal */,
+				A2DB4F8821E562BD0045307E /* FxShapeShader.metal */,
+				A23187472166AD5200917D7B /* FxShapeOSC.metal */,
+				A23187422166727F00917D7B /* FxShapeShaderTypes.h */,
+				A2BD22B021655F9900A33A79 /* main.m */,
+				A2BD22B221655F9900A33A79 /* Info.plist */,
+				A2BD22D721657BBE00A33A79 /* Localizable.strings */,
+				A2BD22B321655F9900A33A79 /* InfoPlist.strings */,
+			);
+			name = PlugIn;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A2BD226F21655F9900A33A79 /* Wrapper Application */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2BD22CE21655F9900A33A79 /* Build configuration list for PBXNativeTarget "Wrapper Application" */;
+			buildPhases = (
+				A2BD226C21655F9900A33A79 /* Sources */,
+				A2BD226D21655F9900A33A79 /* Frameworks */,
+				A2BD226E21655F9900A33A79 /* Resources */,
+				A2BD22CD21655F9900A33A79 /* Embed PlugIns */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A2BD227D21655F9900A33A79 /* PBXTargetDependency */,
+				A2BD229421655F9900A33A79 /* PBXTargetDependency */,
+			);
+			name = "Wrapper Application";
+			productName = "Wrapper Application";
+			productReference = A2BD227021655F9900A33A79 /* FxShape.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A2BD227921655F9900A33A79 /* XPC Service */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2BD22CA21655F9900A33A79 /* Build configuration list for PBXNativeTarget "XPC Service" */;
+			buildPhases = (
+				A2BD227521655F9900A33A79 /* Sources */,
+				A2BD227621655F9900A33A79 /* Frameworks */,
+				A2BD227721655F9900A33A79 /* Resources */,
+				A2BD227821655F9900A33A79 /* Copy and Code Sign PluginManager.framework */,
+				A2BD22C921655F9900A33A79 /* Embed PlugIns */,
+				D6C8249524632E5500D9C626 /* Copy Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "XPC Service";
+			productName = "XPC Service";
+			productReference = A2BD227A21655F9900A33A79 /* FxShape.pluginkit */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A2BD226821655F9900A33A79 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = "Apple, Inc.";
+				TargetAttributes = {
+					A2BD226F21655F9900A33A79 = {
+						CreatedOnToolsVersion = 9.3.1;
+					};
+					A2BD227921655F9900A33A79 = {
+						CreatedOnToolsVersion = 9.3.1;
+					};
+				};
+			};
+			buildConfigurationList = A2BD226B21655F9900A33A79 /* Build configuration list for PBXProject "FxShape" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A2BD226721655F9900A33A79;
+			productRefGroup = A2BD227121655F9900A33A79 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A2BD226F21655F9900A33A79 /* Wrapper Application */,
+				A2BD227921655F9900A33A79 /* XPC Service */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A2BD226E21655F9900A33A79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A28AB5CB239F0FE30091EE84 /* InfoPlist.strings in Resources */,
+				A2BD22A521655F9900A33A79 /* MainMenu.xib in Resources */,
+				A28AB5CE239F0FF00091EE84 /* Credits.rtf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2BD227721655F9900A33A79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2BD22B521655F9900A33A79 /* InfoPlist.strings in Resources */,
+				A2BD22D821657BBE00A33A79 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A2BD227821655F9900A33A79 /* Copy and Code Sign PluginManager.framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy and Code Sign PluginManager.framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mkdir -p \"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}\"\nrsync --archive --links --whole-file --no-owner --no-group --checksum --exclude='Headers' \"/Library/Developer/Frameworks/PluginManager.framework/\" \"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PluginManager.framework/\"\nif [ \"$?\" -ne 0 ]; then echo \"error: rsync failed; couldn't embed PluginManager.framework\"; exit 1; fi\ncodesign --force --timestamp --options runtime --sign \"${CODE_SIGN_IDENTITY}\" \"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PluginManager.framework/\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A2BD226C21655F9900A33A79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2BD229E21655F9900A33A79 /* main.m in Sources */,
+				A2BD229C21655F9900A33A79 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2BD227521655F9900A33A79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2DB4F8A21E56DBD0045307E /* FxShapeShader.metal in Sources */,
+				A23187412166724F00917D7B /* FxMTLDeviceCache.m in Sources */,
+				A231874421667D7A00917D7B /* FxSampleImage.metal in Sources */,
+				A2BD22B121655F9900A33A79 /* main.m in Sources */,
+				A23187482166AD5200917D7B /* FxShapeOSC.metal in Sources */,
+				A2BD22D321655FFB00A33A79 /* FxShapePlugIn.m in Sources */,
+				A2BD22D6216563B900A33A79 /* FxShapeOSC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A2BD227D21655F9900A33A79 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A2BD227921655F9900A33A79 /* XPC Service */;
+			targetProxy = A2BD227C21655F9900A33A79 /* PBXContainerItemProxy */;
+		};
+		A2BD229421655F9900A33A79 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A2BD227921655F9900A33A79 /* XPC Service */;
+			targetProxy = A2BD229321655F9900A33A79 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A28AB5C9239F0FE30091EE84 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A28AB5CA239F0FE30091EE84 /* Base */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A28AB5CC239F0FEF0091EE84 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A28AB5CD239F0FEF0091EE84 /* Base */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		A2BD22A321655F9900A33A79 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A28AB5C8239F0F130091EE84 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		A2BD22B321655F9900A33A79 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A2BD22B421655F9900A33A79 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A2BD22C421655F9900A33A79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ADDITIONAL_SDKS = /Library/Developer/SDKs/FxPlug.sdk;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A2BD22C521655F9900A33A79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ADDITIONAL_SDKS = /Library/Developer/SDKs/FxPlug.sdk;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A2BD22CB21655F9900A33A79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FxShape/XPC Service/Prefix.pch";
+				INFOPLIST_FILE = "FxShape/XPC Service/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				MACH_O_TYPE = mh_execute;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = FxShape;
+				WRAPPER_EXTENSION = pluginkit;
+			};
+			name = Debug;
+		};
+		A2BD22CC21655F9900A33A79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FxShape/XPC Service/Prefix.pch";
+				INFOPLIST_FILE = "FxShape/XPC Service/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				MACH_O_TYPE = mh_execute;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = FxShape;
+				WRAPPER_EXTENSION = pluginkit;
+			};
+			name = Release;
+		};
+		A2BD22CF21655F9900A33A79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "FxShape/Wrapper Application/SandboxEntitlements.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_HARDENED_RUNTIME = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FxShape/Wrapper Application/Prefix.pch";
+				INFOPLIST_FILE = "FxShape/Wrapper Application/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = FxShape;
+			};
+			name = Debug;
+		};
+		A2BD22D021655F9900A33A79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "FxShape/Wrapper Application/SandboxEntitlements.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_HARDENED_RUNTIME = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FxShape/Wrapper Application/Prefix.pch";
+				INFOPLIST_FILE = "FxShape/Wrapper Application/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = FxShape;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A2BD226B21655F9900A33A79 /* Build configuration list for PBXProject "FxShape" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2BD22C421655F9900A33A79 /* Debug */,
+				A2BD22C521655F9900A33A79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A2BD22CA21655F9900A33A79 /* Build configuration list for PBXNativeTarget "XPC Service" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2BD22CB21655F9900A33A79 /* Debug */,
+				A2BD22CC21655F9900A33A79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A2BD22CE21655F9900A33A79 /* Build configuration list for PBXNativeTarget "Wrapper Application" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2BD22CF21655F9900A33A79 /* Debug */,
+				A2BD22D021655F9900A33A79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A2BD226821655F9900A33A79 /* Project object */;
+}
