@@ -3,22 +3,4 @@
    uuid = "ED6DA654-64C1-4B1C-AF3C-84F2AF0DD2A1"
    type = "1"
    version = "2.0">
-   <Breakpoints>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A4BE6C32-6CF5-4450-9E70-1AF2B92DE643"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FxShape/XPC Service/FxShapePlugIn.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "579"
-            endingLineNumber = "579"
-            landmarkName = "-drawRectangle:withSourceImage:destinationImage:modelView:projection:commandEncoder:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-   </Breakpoints>
 </Bucket>
